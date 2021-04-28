@@ -9,7 +9,7 @@
     
     <title>
         
-            cordova-sqlite-storage 安裝失敗問題 |
+            Canvas 等比例調整大小 &amp; ASP. NET (C#) Image 儲存踩坑 |
         
         WJ&#39;s Notes
     </title>
@@ -136,7 +136,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">cordova-sqlite-storage 安裝失敗問題</span>
+            <span class="title-hover-animation">Canvas 等比例調整大小 &amp; ASP. NET (C#) Image 儲存踩坑</span>
         </div>
 
         
@@ -152,7 +152,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-04-17 18:01:00
+        <i class="fas fa-edit"></i>&nbsp;2021-04-28 18:40:54
     </span>
     
     
@@ -161,11 +161,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/Cordova/">Cordova</a>&nbsp;
+                        <a href="/tags/ASP-NET/">ASP.NET</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/Cordova-Plugin/">Cordova-Plugin</a>&nbsp;
+                        | <a href="/tags/Canvas/">Canvas</a>&nbsp;
                     </li>
                 
             </ul>
@@ -188,22 +188,51 @@
     <img  style="margin: 0 auto;width:300px" 
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://firebasestorage.googleapis.com/v0/b/wjblog-d3c13.appspot.com/o/1200px-Apache_Cordova_Logo.svg.png?alt=media&token=9c49148f-394e-4498-b46f-56f8c259cb51"
+                     data-src="https://firebasestorage.googleapis.com/v0/b/wjblog-d3c13.appspot.com/o/1619608841548.png?alt=media&token=774d547d-c2f9-4ade-af65-f275fc84e760"
                      
                 >
 </div>
 
-<p>今天在維護舊專案要重新 Build 時發現 <strong>cordova-sqlite-storage</strong> 這個 plugin 一直 Failed to install</p>
-<blockquote>
-<p>Failed to install ‘cordova-sqlite-storage’: CordovaError: Using “requireCordovaModule” to load non-cordova module “q” is not supported.</p>
-</blockquote>
-<p>找了許久的原因終於發現原來是 <font color=#FF0000>Cordova 升級至 9.0之後已經不支援該 plugin ，因為 q 模組缺少安全性</font></p>
+<h1 id="System-Web-HttpException-超出最大的要求長度"><a href="#System-Web-HttpException-超出最大的要求長度" class="headerlink" title="System. Web. HttpException 超出最大的要求長度"></a>System. Web. HttpException 超出最大的要求長度</h1><p>在 <a class="link"   target="_blank" rel="noopener" href="https://weijie0.github.io/2021/04/21/CanvasWatermark/" >使用 Canvas 加上浮水印<i class="fas fa-external-link-alt"></i></a> 中將圖片傳到後端後，居然出現 <code>System. Web. HttpException 超出最大的要求長度</code> </p>
 <span id="more"></span>
+<p>後來想想，現在智慧型手機拍照的解析度都非常高，所以檔案大小也隨隨便便就來到 6 7 MB，因此在前端的部分如果沒有針對 User 上傳的圖片做整理，就會超越了 Server 的限制。</p>
+<p>先宣告一個 <code>Wsize</code> 指定寬度及縮放比例 <code>scale</code> = 1 若是上傳的圖片寬度大於 300 時，縮放比例就為 <code>300 / 圖片寬度</code><br>再將 <code>Canvas</code> 的高及寬乘上縮放比例，就為等比例縮小為寬 300 的新尺寸繪製到 <code>canvas</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> scale = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> Wsize = <span class="number">300</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (img.width &gt; Wsize)</span><br><span class="line">    scale = Wsize / img.width;</span><br><span class="line"></span><br><span class="line">canvas.width = img.width * scale;</span><br><span class="line">canvas.height = img.height * scale;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> ctx = canvas.getContext(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">ctx.drawImage(img, <span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br></pre></td></tr></table></figure>
 
-<p>得知這個問題後，若想快速解決這個問題就是<font color=#008000>降版至 8.1 </font> <code>npm uninstall cordova -g &amp; npm install cordova@8.1.0 -g</code><br>但因為還須要維護其他專案，所以就不考慮降版於是繼續尋找解決辦法</p>
-<p>於是在官方的 github 中 issue 發現官方已經有解決這個問題，所以重新安裝 plugin 但還是發現一樣的問題…<br>後來比對了 js 的內容發現 <code>cordova-sqlite-storage/scripts/beforePluginInstall.js </code> 中 已經拿掉 module q 的內容<br>但實際使用 npm 下載卻還是舊版本，於是<font color=#008000>替換掉程式碼 </font>就順利解決了 了，這邊提供給有相同問題的夥伴們</p>
-<p>將 專案中 <code>plugins/cordova-sqlite-storage/scripts/beforePluginInstall.js</code> 內容改成下列程式碼即可</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> exec = <span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>).exec;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> packageName = <span class="built_in">require</span>(<span class="string">&#x27;../package.json&#x27;</span>).name;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;installing external dependencies via npm&#x27;</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;for package name: &#x27;</span> + packageName);</span><br><span class="line"></span><br><span class="line">        exec(<span class="string">&#x27;npm install&#x27;</span>, &#123;</span><br><span class="line">                cwd: path.join(<span class="string">&#x27;plugins&#x27;</span>, packageName)</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">error, stdout, stderr</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (error !== <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">&#x27;npm install of external dependencies failed with error message: &#x27;</span> + error.message);</span><br><span class="line">                    reject();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">&#x27;npm install of external dependencies ok&#x27;</span>);</span><br><span class="line">                    resolve();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>如果單次上傳僅上傳一張圖片，那麼經過壓縮後應該是沒問題，但我處理的證件上傳頁面，需要上傳 3 張，所以還是放不下，<br>所以只好更改 Server 設定了</p>
+<p>於 <code>Web.config</code> 中新增下列參數更改檔案上傳限制大小，預設上限值 <code>4096 (4 MB)</code>，單位為 <code>KB</code></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;httpRuntime maxRequestLength=<span class="string">&quot;10240&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不過這邊也要特別留意，萬一上限值太過鬆散時，容易遭到上傳過大的檔案進行攻擊，因此設定值也是需要準確評估。</li>
+</ul>
+<hr>
+
+<h1 id="在-GDI-中發生泛型錯誤"><a href="#在-GDI-中發生泛型錯誤" class="headerlink" title="在 GDI+ 中發生泛型錯誤"></a>在 GDI+ 中發生泛型錯誤</h1><p>調整完限制小後再次嘗試，結果又跳出錯誤<code>在 GDI+ 中發生泛型錯誤</code>，而最可怕的是<br>這個錯誤不會指出明確的錯誤點，所以在 debug 上更加的困難</p>
+<p>而再次 Google 後發現，出現<code>在 GDI+ 中發生泛型錯誤</code>多半不是程式問題，而是圖片在儲存時發生了錯誤</p>
+<p>於是檢查了一下儲存目的端的資料夾權限，再重複調整後發現： <strong>需要開啟供 IIS 使用的安全性</strong></p>
+<ol>
+<li><p>於檔案總管開啟目的資料夾的「內容」</p>
+<div>
+ <img  style="margin: 0 auto" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://firebasestorage.googleapis.com/v0/b/wjblog-d3c13.appspot.com/o/aspsave01.PNG?alt=media&token=f19e86ca-c62c-402e-8fb8-d6ee5ec1774d"
+                     
+                >
+</div></li>
+<li><p>於安全性中新增 <code>IIS_IUSRS</code> 並將權限開啟完全控制</p>
+<div>
+ <img  style="margin: 0 auto" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://firebasestorage.googleapis.com/v0/b/wjblog-d3c13.appspot.com/o/aspsave02.PNG?alt=media&token=7f027161-2452-4ef5-b724-3f79bc815442"
+                     
+                >
+</div>
+完成設定後，就可以上傳成功了。</li>
+</ol>
+<p>而除了權限問題還有可能是其他問題可以參考 will 保哥 的資料 <a class="link"   target="_blank" rel="noopener" href="https://blog.miniasp.com/post/2009/05/30/A-generic-error-occurred-in-GDI-plus" >關於【在 GDI+ 中發生泛型錯誤】出現的時機<i class="fas fa-external-link-alt"></i></a></p>
 
         </div>
 
@@ -212,21 +241,21 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/04/19/JsGetRadioButtonList/"
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/04/24/CanvasWatermark/"
                         >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">使用 Javascript 取得 RadioButtonList 值</span>
-                                <span class="post-nav-item">上一篇</span>
+                                <span class="post-nav-title-item">使用 Canvas 加上浮水印再傳至 ASP.NET (C#)</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
                             </span>
                         </a>
                     </div>
-                
                 
             </div>
         
