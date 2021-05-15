@@ -9,7 +9,7 @@
     
     <title>
         
-            VSCode 實用 Plugin -- Code Runner |
+            Windwos 10 自動縮放的逆襲 |
         
         WJ&#39;s Notes
     </title>
@@ -136,7 +136,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">VSCode 實用 Plugin -- Code Runner</span>
+            <span class="title-hover-animation">Windwos 10 自動縮放的逆襲</span>
         </div>
 
         
@@ -152,7 +152,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-05-06 22:11:20
+        <i class="fas fa-edit"></i>&nbsp;2021-05-10 13:54:39
     </span>
     
     
@@ -161,7 +161,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/VSCODE/">VSCODE</a>&nbsp;
+                        <a href="/tags/CSS/">CSS</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Windows-10/">Windows 10</a>&nbsp;
                     </li>
                 
             </ul>
@@ -184,76 +188,31 @@
     <img  style="margin: 0 auto;width:500px" 
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://firebasestorage.googleapis.com/v0/b/wjblog-d3c13.appspot.com/o/Code%20Runner.jpg?alt=media&token=cb01e2c5-58bb-43fb-9047-77e751bd4a89"
+                     data-src="https://firebasestorage.googleapis.com/v0/b/wjblog-d3c13.appspot.com/o/windows%20Scale.JPG?alt=media&token=e77c4d85-f5dd-49b9-864a-df14044d3cb9"
                      
                 >
 </div>
 
-<p>在寫 Code 的時候偶爾會遇到需要把結果 print 出來看看邏輯是否正確，在<code>js</code>中可以用 <code>console.log()</code> 印出，在 <code>C#</code> 中則需要找一件 <code>event </code>執行 <code>Console.WriteLine()</code>，於似乎這個 Plugin 就顯得方便許多。</p>
-<div>
-    <img  style="margin: 0 auto;width:500px" 
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://firebasestorage.googleapis.com/v0/b/wjblog-d3c13.appspot.com/o/CodeRunner1.jpg?alt=media&token=9cc7ea6a-0c31-4f96-9e03-9a3e5ef410de"
-                     
-                >
-</div>
-<br>
-<div>
-    <img  style="margin: 0 auto;width:500px" 
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://firebasestorage.googleapis.com/v0/b/wjblog-d3c13.appspot.com/o/CodeRunner2.JPG?alt=media&token=ebbc80d1-9b74-4263-a060-aebb1a8bdd30"
-                     
-                >
-</div>
-
+<p>這幾天客戶反應網站的某些部份與設計稿不同，某些圖片明顯大了許多<br>不過我仔細檢查 @media query 確實都有做到調整<br>螢幕解析度調整至客戶的數值依然看不出甚麼異樣<br>不過遠端至客戶電腦的確出現圖片放大的問題</p>
 <span id="more"></span>
 
-<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><p>首先在 VSCode 的延伸模組中搜尋 <code>Code Runner</code> 安裝，完成後有很多的快捷鍵執行</p>
-<ol>
-<li><code>Ctrl</code> + <code>Alt</code> + <code>N</code></li>
-<li>選取該段程式碼按右鍵→ <code>Run Code</code></li>
-<li>右上方有一個執行鍵</li>
-</ol>
-<hr>
-<h2 id="支援語言"><a href="#支援語言" class="headerlink" title="支援語言"></a>支援語言</h2><p>支援的語言如下：<br><code>java, c, cpp, javascript, php, python, perl, ruby, go, lua, groovy, powershell, bat, shellscript, fsharp, csharp, vbscript, typescript, coffeescript, swift, r, clojure, haxe, objective-c, rust, racket, ahk, autoit, kotlin, dart, pascal, haskell, nim, d, lisp</code></p>
-<p>不過有一些語言還是需要安裝相對的編譯器並設定環境變數才可以運行 ex:python</p>
-<hr>
-<h2 id="設定自訂命令"><a href="#設定自訂命令" class="headerlink" title="設定自訂命令"></a>設定自訂命令</h2><p>此外也可以設定要執行的條件跟 cmd 的內容 <code>config</code> ：<code>設定</code> <code>延伸模組</code> <code>Run Code configuration</code> <code>Executor Map</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;code-runner.executorMap&quot;: &#123;</span><br><span class="line">        &quot;javascript&quot;: &quot;node&quot;,</span><br><span class="line">        &quot;php&quot;: &quot;C:\\php\\php.exe&quot;,</span><br><span class="line">        &quot;python&quot;: &quot;python&quot;,</span><br><span class="line">        &quot;perl&quot;: &quot;perl&quot;,</span><br><span class="line">        &quot;ruby&quot;: &quot;C:\\Ruby23-x64\\bin\\ruby.exe&quot;,</span><br><span class="line">        &quot;go&quot;: &quot;go run&quot;,</span><br><span class="line">        &quot;html&quot;: &quot;\&quot;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\&quot;&quot;,</span><br><span class="line">        &quot;java&quot;: &quot;cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt&quot;,</span><br><span class="line">        &quot;c&quot;: &quot;cd $dir &amp;&amp; gcc $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>也有相關的變數可以進行使用：</p>
-<table>
-    <tr>
-        <th>$workspaceRoot</th>
-        <td>當前工作區的 root 資料夾路徑</td>
-    </tr>
-     <tr>
-        <th>$dir</th>
-        <td>目前正在執行的檔案路徑</td>
-    </tr>
-     <tr>
-        <th>$fullFileName</th>
-        <td>目前執行檔案的路徑</td>
-    </tr>
-     <tr>
-        <th>$fileName</th>
-        <td>目前執行檔案的名稱(沒有路徑)</td>
-    </tr>
-     <tr>
-        <th>$fileNameWithoutExt</th>
-        <td>目前執行檔案的名稱(無副檔名)</td>
-    </tr>
-</table>
+<p>在確認過 <em>瀏覽器縮放</em> <em>windows 字體縮放</em> 無特別調整後無意間看到了這個</p>
+<div>
+    <img  style="margin: 0 auto;width:500px" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://firebasestorage.googleapis.com/v0/b/wjblog-d3c13.appspot.com/o/windows%20Scale.JPG?alt=media&token=e77c4d85-f5dd-49b9-864a-df14044d3cb9"
+                     
+                >
+</div>
 
-<hr>
-<h2 id="中文亂碼輸出編碼調整"><a href="#中文亂碼輸出編碼調整" class="headerlink" title="中文亂碼輸出編碼調整"></a>中文亂碼輸出編碼調整</h2><p>另外也支援中文字的輸出，如果出現亂碼則要調整讓 <code>Code Runner</code> 執行於終端機</p>
-<p><code>設定</code> <code>延伸模組</code> <code>Run Code configuration</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;code-runner.runInTerminal&quot;</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>把他調至 100% 原始大小後果然沒問題了!!<br>於是上網找有關於 windows 內建的縮放在 js 和 css 有無因應辦法<br>答案是兩者都有</p>
+<h2 id="解決方式"><a href="#解決方式" class="headerlink" title="解決方式"></a>解決方式</h2><p>js 的部分 <code>window.devicePixelRatio</code> 的 value 則是縮放的百分比<br>100% 就會等於 1 ，上圖的 125% 就會等於 1.25<br>所以我們可以依照這個值去算出需要縮放的比例，再針對圖片進行縮放</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.devicePixelRatio != <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">// 若非 100% 時做出調整</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> _scale = (<span class="number">1</span> / <span class="built_in">window</span>.devicePixelRatio);</span><br><span class="line">    $(<span class="string">&#x27;#img1&#x27;</span>).css(<span class="string">&#x27;transform&#x27;</span>,<span class="string">&#x27;scale(&#x27;</span>+_scale+<span class="string">&#x27;)&#x27;</span>);</span><br><span class="line">    <span class="comment">// 照比例進行縮放</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<hr>
-<p>其他詳細設定請參考 <a class="link"   target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner" >Code Runner 官方頁面<i class="fas fa-external-link-alt"></i></a></p>
+<p>CSS 的部分則是透過 media query <code>-webkit-min-device-pixel-ratio</code> 來設定值<br>值的部分和 <code>window.devicePixelRatio</code> 一樣為百分比</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> (<span class="attribute">-webkit-min-device-pixel-ratio</span>: <span class="number">1.25</span>) &#123;</span><br><span class="line">    <span class="selector-tag">img</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scale</span>(.<span class="number">8</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -262,29 +221,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/05/10/WindowsDPIScale/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Windwos 10 自動縮放的逆襲</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/04/28/AspnetImageSaveError/"
+                           href="/2021/05/06/VSCodePluginCodeRunner/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Canvas 等比例調整大小 &amp; ASP. NET (C#) Image 儲存踩坑</span>
+                                <span class="post-nav-title-item">VSCode 實用 Plugin -- Code Runner</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
